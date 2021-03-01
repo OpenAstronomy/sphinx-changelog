@@ -2,6 +2,7 @@ import tempfile
 
 from docutils import statemachine
 from docutils.parsers.rst import Directive
+from docutils.parsers.rst.directives import unchanged, path
 
 from .towncrier import generate_changelog_for_docs
 
@@ -29,17 +30,33 @@ class ChangeLog(Directive):
         .. changelog::
     """
     required_arguments = 0
-    optional_arguments = 1
+    optional_arguments = 0
+    option_spec = {
+        'changelog_file': path,
+        'towncrier': unchanged,
+    }
+
     final_argument_whitespace = True
 
-    def run(self):
-        config_path = self.arguments[0] or "../"
+    def render_towncrier(self):
+        config_path = self.options.get("towncrier") or "../"
         output_file = tempfile.mkstemp()[1]
         generate_changelog_for_docs(config_path, output_filename=output_file)
         with open(output_file) as fobj:
-            include_lines = statemachine.string2lines(fobj.read(), convert_whitespace=True)
+            return statemachine.string2lines(fobj.read(), convert_whitespace=True)
 
-        self.state_machine.insert_input(include_lines, "")
+    def include_changelog(self):
+        with open(self.options['changelog_file']) as fobj:
+            return statemachine.string2lines(fobj.read(), convert_whitespace=True)
+
+    def run(self):
+        # These includes should be in reverse order (apparently)
+        # the last one ends up at the top of the rendered output.
+        if "changelog_file" in self.options:
+            self.state_machine.insert_input(self.include_changelog(), "")
+
+        if "towncrier" in self.options:
+            self.state_machine.insert_input(self.render_towncrier(), "")
 
         return []
 
