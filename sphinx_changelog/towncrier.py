@@ -25,7 +25,7 @@ __all__ = ["generate_changelog_for_docs"]
 
 def generate_changelog_for_docs(directory, output_filename=None):
     """
-    This is a modified version of the `towncrier._main` function with a few
+    This is a modified version of the `towncrier.build.__main` function with a few
     things disabled.
     """
     print("Updating Changelog...")

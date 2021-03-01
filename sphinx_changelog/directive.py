@@ -3,7 +3,7 @@ import tempfile
 from docutils import statemachine
 from docutils.parsers.rst import Directive
 
-from sunpy.util.towncrier import generate_changelog_for_docs
+from .towncrier import generate_changelog_for_docs
 
 __all__ = ['ChangeLog']
 
