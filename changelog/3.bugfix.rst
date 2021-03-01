@@ -1,1 +1,0 @@
-Fix use of template and update to parsing code from a newer towncrier version

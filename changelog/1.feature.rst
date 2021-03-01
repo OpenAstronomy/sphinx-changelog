@@ -1,2 +1,0 @@
-Implement options for changelog backend. Including the existing changelog and
-towncrier are currently available.
