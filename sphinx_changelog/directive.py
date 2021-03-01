@@ -1,5 +1,3 @@
-import tempfile
-
 from docutils import statemachine
 from docutils.parsers.rst import Directive
 from docutils.parsers.rst.directives import unchanged, path
@@ -40,10 +38,8 @@ class ChangeLog(Directive):
 
     def render_towncrier(self):
         config_path = self.options.get("towncrier") or "../"
-        output_file = tempfile.mkstemp()[1]
-        generate_changelog_for_docs(config_path, output_filename=output_file)
-        with open(output_file) as fobj:
-            return statemachine.string2lines(fobj.read(), convert_whitespace=True)
+        changelog = generate_changelog_for_docs(config_path)
+        return statemachine.string2lines(changelog, convert_whitespace=True)
 
     def include_changelog(self):
         with open(self.options['changelog_file']) as fobj:

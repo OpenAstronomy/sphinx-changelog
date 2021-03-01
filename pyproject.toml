@@ -9,6 +9,7 @@ requires = ["setuptools",
     filename = "CHANGELOG.rst"
     directory = "changelog/"
     issue_format = "`#{issue} <https://github.com/OpenAstronomy/sphinx-changelog/pull/{issue}>`__"
+    template = "changelog/template.rst"
 
     [[tool.towncrier.type]]
         directory = "breaking"
