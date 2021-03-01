@@ -18,18 +18,33 @@ then put the following rst into your documentation:
 .. code-block:: rst
 
     .. changelog::
+       :towncrier:
 
 By default it will assume the root of the repository (location of the ``pyproject.toml`` file) is up one leve from the location of the rst file with the directive in it.
 This makes the default equivalent to:
 
 .. code-block:: rst
 
-    .. changelog:: ../
+    .. changelog::
+       :towncrier: ../
 
-You can specify any relative path to the root of the repository.
+The path should point to the root of the repository from the location of the file with the directive in it.
+
+If you want to include the rendered changelog as well as the development one rendered by towncrier you can add the ``:changelog_file:`` option:
+
+.. code-block:: rst
+
+    .. changelog::
+       :towncrier: ../
+       :changelog_file: ../CHANGELOG.rst
+
+The changelog file is assumed to be an ReST file, and will be included below the towncrier output.
+It is possible to use just the changelog include and not towncrier.
 
 
 sphinx-changelog's Changelog
-############################
+----------------------------
 
-.. changelog:: ../
+.. changelog::
+   :towncrier:
+   :changelog_file: ../CHANGELOG.rst
