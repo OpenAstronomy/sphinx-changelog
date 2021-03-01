@@ -1,0 +1,18 @@
+# readthedocs.yml
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+version: 2
+
+sphinx:
+  builder: html
+  configuration: docs/conf.py
+  fail_on_warning: true
+
+python:
+  version: 3.9
+  install:
+    # Any extra pip dependencies not installed via extras should be specified
+    # in the conda environment file.
+    - method: pip
+      path: .
