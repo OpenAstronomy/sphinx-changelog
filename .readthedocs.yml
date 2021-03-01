@@ -10,7 +10,7 @@ sphinx:
   fail_on_warning: true
 
 python:
-  version: 3.9
+  version: 3.8
   install:
     # Any extra pip dependencies not installed via extras should be specified
     # in the conda environment file.
