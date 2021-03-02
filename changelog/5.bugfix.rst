@@ -1,1 +1,0 @@
-Raise a more helpful error if no towncrier config can be found.

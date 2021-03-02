@@ -1,3 +1,12 @@
+Sphinx_Changelog v0.1rc3 (2021-03-02)
+=====================================
+
+Bug Fixes
+---------
+
+- Raise a more helpful error if no towncrier config can be found. (`#5 <https://github.com/OpenAstronomy/sphinx-changelog/pull/5>`__)
+
+
 Sphinx_Changelog v0.1rc2 (2021-03-01)
 =====================================
 
