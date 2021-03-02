@@ -1,6 +1,12 @@
 A changelog renderer for sphinx.
 --------------------------------
 
+This package provides a sphinx extension designed to facilitate rendering changelogs into your sphinx documentation.
+
+Currently this supports `towncrier <https://github.com/twisted/towncrier>`__ and inclusion of a ReST changelog file.
+
+For more details see the documentation: https://sphinx-changelog.readthedocs.io
+
 License
 -------
 
