@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from docutils import statemachine
 from sphinx.util.docutils import SphinxDirective
 from docutils.parsers.rst.directives import path, unchanged, flag
@@ -7,7 +9,7 @@ from .towncrier import generate_changelog_for_docs
 __all__ = ['ChangeLog']
 
 
-class ChangeLog(Directive):
+class ChangeLog(SphinxDirective):
     """
     Render the changelog for the current commit using towncrier.
 
@@ -37,14 +39,23 @@ class ChangeLog(Directive):
 
     final_argument_whitespace = True
 
+    def get_absolute_path(self, apath):
+        # This method returns relative and absolute paths
+        _, apath = self.env.relfn2path(apath)
+        return Path(apath)
+
     def render_towncrier(self):
         config_path = self.options.get("towncrier") or "../"
+        config_path = self.get_absolute_path(config_path)
         skip_if_empty = "towncrier-skip-if-empty" in self.options
         changelog = generate_changelog_for_docs(config_path, skip_if_empty=skip_if_empty)
         return statemachine.string2lines(changelog, convert_whitespace=True)
 
     def include_changelog(self):
-        with open(self.options['changelog_file']) as fobj:
+        changelog_filename = self.get_absolute_path(self.options['changelog_file'])
+        if not changelog_filename.exists():
+            raise ValueError(f"Can not find changelog file at {changelog_filename}")
+        with open(changelog_filename) as fobj:
             return statemachine.string2lines(fobj.read(), convert_whitespace=True)
 
     def run(self):
