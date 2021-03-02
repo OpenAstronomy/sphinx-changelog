@@ -43,7 +43,7 @@ It is possible to use just the changelog include and not towncrier.
 
 
 Skipping towncrier on Release Builds
-###################################
+------------------------------------
 
 If you combine the towncrier and changelog file options, when the documentation builds on a release there will be no fragments to render.
 This means that towncrier will still render an empty changelog duplicating the pre-rendered header for the release.
