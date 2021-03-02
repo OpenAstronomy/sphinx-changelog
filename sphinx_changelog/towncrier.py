@@ -25,6 +25,8 @@ def generate_changelog_for_docs(directory):
     """
     directory = os.path.abspath(directory)
     config = load_config(directory)
+    if config is None:
+        raise ValueError(f"No vaild towncrier configuration could be found in the directory {directory}")
 
     curdir = os.getcwd()
     os.chdir(directory)
