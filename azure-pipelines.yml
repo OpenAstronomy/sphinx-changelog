@@ -62,5 +62,5 @@ stages:
             pypi_connection_name : 'PyPI'
           submodules: false
           targets:
-            - wheel_universal
+            - wheels_universal
             - sdist
