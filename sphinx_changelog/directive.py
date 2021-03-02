@@ -1,6 +1,6 @@
 from docutils import statemachine
 from docutils.parsers.rst import Directive
-from docutils.parsers.rst.directives import unchanged, path
+from docutils.parsers.rst.directives import path, unchanged
 
 from .towncrier import generate_changelog_for_docs
 

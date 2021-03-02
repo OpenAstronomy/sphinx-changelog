@@ -7,12 +7,12 @@ licenses/TOWNCRIER.rst
 """
 import os
 from datetime import date
-import pkg_resources
 
+import pkg_resources
+from towncrier._builder import (find_fragments, render_fragments,
+                                split_fragments)
+from towncrier._project import get_project_name, get_version
 from towncrier._settings import load_config
-from towncrier._builder import find_fragments, split_fragments, render_fragments
-from towncrier._project import get_version, get_project_name
-from towncrier._version import __version__
 
 
 def _get_date():
@@ -51,7 +51,7 @@ def generate_changelog_for_docs(directory):
         )
         fragment_directory = "newsfragments"
 
-    fragments, fragment_filenames = find_fragments(
+    fragments, _ = find_fragments(
         base_directory, config["sections"], fragment_directory, definitions
     )
 
