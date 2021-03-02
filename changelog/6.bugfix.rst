@@ -1,0 +1,1 @@
+Fix resolving paths relative to the file containing the changelog directive.

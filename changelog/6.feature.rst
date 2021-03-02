@@ -1,0 +1,1 @@
+Add a flag to skip running towncrier if no fragment files are found.
