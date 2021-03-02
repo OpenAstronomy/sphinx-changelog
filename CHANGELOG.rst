@@ -1,3 +1,18 @@
+Sphinx_Changelog v0.1rc4 (2021-03-02)
+=====================================
+
+Features
+--------
+
+- Add a flag to skip running towncrier if no fragment files are found. (`#6 <https://github.com/OpenAstronomy/sphinx-changelog/pull/6>`__)
+
+
+Bug Fixes
+---------
+
+- Fix resolving paths relative to the file containing the changelog directive. (`#6 <https://github.com/OpenAstronomy/sphinx-changelog/pull/6>`__)
+
+
 Sphinx_Changelog v0.1rc3 (2021-03-02)
 =====================================
 
