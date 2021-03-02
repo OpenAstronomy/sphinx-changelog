@@ -12,6 +12,13 @@ Towncrier
 .. changelog::
    :towncrier:
 
+Towncrier skip-if-empty
+#######################
+
+.. changelog::
+   :towncrier:
+   :towncrier-skip-if-empty:
+
 
 Towncrier and rst
 #################
