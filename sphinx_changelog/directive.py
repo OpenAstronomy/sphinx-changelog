@@ -1,6 +1,6 @@
 from docutils import statemachine
-from docutils.parsers.rst import Directive
-from docutils.parsers.rst.directives import path, unchanged
+from sphinx.util.docutils import SphinxDirective
+from docutils.parsers.rst.directives import path, unchanged, flag
 
 from .towncrier import generate_changelog_for_docs
 
@@ -32,13 +32,15 @@ class ChangeLog(Directive):
     option_spec = {
         'changelog_file': path,
         'towncrier': unchanged,
+        'towncrier-skip-if-empty': flag,
     }
 
     final_argument_whitespace = True
 
     def render_towncrier(self):
         config_path = self.options.get("towncrier") or "../"
-        changelog = generate_changelog_for_docs(config_path)
+        skip_if_empty = "towncrier-skip-if-empty" in self.options
+        changelog = generate_changelog_for_docs(config_path, skip_if_empty=skip_if_empty)
         return statemachine.string2lines(changelog, convert_whitespace=True)
 
     def include_changelog(self):

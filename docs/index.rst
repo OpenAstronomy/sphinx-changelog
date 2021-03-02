@@ -42,6 +42,21 @@ The changelog file is assumed to be an ReST file, and will be included below the
 It is possible to use just the changelog include and not towncrier.
 
 
+Skipping towncrier on Release Builds
+###################################
+
+If you combine the towncrier and changelog file options, when the documentation builds on a release there will be no fragments to render.
+This means that towncrier will still render an empty changelog duplicating the pre-rendered header for the release.
+To disable towncrier output if no fragment files are found add the ``:towncrier-skip-if-emtpy:`` option to the directive:
+
+.. code-block:: rst
+
+    .. changelog::
+       :towncrier: ../
+       :towncrier-skip-if-empty:
+       :changelog_file: ../CHANGELOG.rst
+
+
 sphinx-changelog's Changelog
 ----------------------------
 

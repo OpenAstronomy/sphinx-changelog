@@ -19,7 +19,7 @@ def _get_date():
     return date.today().isoformat()
 
 
-def generate_changelog_for_docs(directory):
+def generate_changelog_for_docs(directory, skip_if_empty=True):
     """
     The main entry point.
     """
@@ -53,9 +53,12 @@ def generate_changelog_for_docs(directory):
         )
         fragment_directory = "newsfragments"
 
-    fragments, _ = find_fragments(
+    fragments, fragment_filenames = find_fragments(
         base_directory, config["sections"], fragment_directory, definitions
     )
+
+    if skip_if_empty and not fragment_filenames:
+        return ""
 
     print("Rendering news fragments...")
     fragments = split_fragments(fragments, definitions)
