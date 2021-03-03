@@ -48,13 +48,16 @@ class ChangeLog(SphinxDirective):
         config_path = self.options.get("towncrier") or "../"
         config_path = self.get_absolute_path(config_path)
         skip_if_empty = "towncrier-skip-if-empty" in self.options
-        changelog = generate_changelog_for_docs(config_path, skip_if_empty=skip_if_empty)
+        try:
+            changelog = generate_changelog_for_docs(config_path, skip_if_empty=skip_if_empty)
+        except Exception as exc:
+            raise self.severe(str(exc))
         return statemachine.string2lines(changelog, convert_whitespace=True)
 
     def include_changelog(self):
         changelog_filename = self.get_absolute_path(self.options['changelog_file'])
         if not changelog_filename.exists():
-            raise ValueError(f"Can not find changelog file at {changelog_filename}")
+            raise self.severe(f"Can not find changelog file at {changelog_filename}")
         with open(changelog_filename) as fobj:
             return statemachine.string2lines(fobj.read(), convert_whitespace=True)
 
@@ -67,11 +70,6 @@ class ChangeLog(SphinxDirective):
         if "towncrier" in self.options:
             self.state_machine.insert_input(self.render_towncrier(), "")
 
-        return []
-
-
-class DummyChangelog(ChangeLog):
-    def run(self):
         return []
 
 
