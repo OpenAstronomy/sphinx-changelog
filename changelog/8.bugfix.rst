@@ -1,2 +1,0 @@
-Do not raise exceptions inside the directive as this can cause the sphinx
-parallel build to fail.

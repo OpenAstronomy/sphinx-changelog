@@ -1,3 +1,13 @@
+Sphinx_Changelog v0.1rc5 (2021-03-03)
+=====================================
+
+Bug Fixes
+---------
+
+- Do not raise exceptions inside the directive as this can cause the sphinx
+  parallel build to fail. (`#8 <https://github.com/OpenAstronomy/sphinx-changelog/pull/8>`__)
+
+
 Sphinx_Changelog v0.1rc4 (2021-03-02)
 =====================================
 
