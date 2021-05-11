@@ -1,1 +1,0 @@
-Added support for controlling the title underline used by towncrier in the changelog directive.

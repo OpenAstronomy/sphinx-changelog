@@ -1,3 +1,13 @@
+Sphinx_Changelog 1.1.0rc1 (2021-05-11)
+======================================
+
+Features
+--------
+
+- Update to support only the latest release of towncrier as there were some substantial changes. (`#9 <https://github.com/OpenAstronomy/sphinx-changelog/pull/9>`__)
+- Added support for controlling the title underline used by towncrier in the changelog directive. (`#9 <https://github.com/OpenAstronomy/sphinx-changelog/pull/9>`__)
+
+
 Sphinx_Changelog v1.0.0 (2021-03-16)
 ====================================
 
