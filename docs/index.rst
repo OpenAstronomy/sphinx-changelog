@@ -56,6 +56,21 @@ To disable towncrier output if no fragment files are found add the ``:towncrier-
        :towncrier-skip-if-empty:
        :changelog_file: ../CHANGELOG.rst
 
+Controlling the Underline Used by towncrier
+-------------------------------------------
+
+When embedding the directive in an existing rst document you might need to adjust the heading levels used when rendering the changelog.
+towncrier provides the "underlines" config option which allows you to control the characters used.
+By default the 0th element in this sequence is used for the title and the following ones for the subsections.
+This behaviour can be adjusted by setting the ``towncrier-title-underline-index`` option as follows:
+
+.. code-block:: rst
+
+    .. changelog::
+       :towncrier: ../
+       :towncrier-title-underline-index: 1
+
+Note that this setting does not affect the rendered changelog, so it is probably not very useful when combined with the ``:changelog_file:`` option.
 
 sphinx-changelog's Changelog
 ----------------------------
