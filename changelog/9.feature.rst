@@ -1,0 +1,1 @@
+Update to support only the latest release of towncrier as there were some substantial changes.
