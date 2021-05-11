@@ -27,6 +27,14 @@ Towncrier and rst
    :towncrier:
    :changelog_file: ../CHANGELOG.rst
 
+
+Towncrier title level
+#####################
+
+.. changelog::
+   :towncrier:
+   :towncrier-title-underline-index: 0
+
 rst
 ###
 

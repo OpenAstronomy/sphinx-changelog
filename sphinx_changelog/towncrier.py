@@ -12,30 +12,37 @@ import pkg_resources
 from towncrier._builder import (find_fragments, render_fragments,
                                 split_fragments)
 from towncrier._project import get_project_name, get_version
-from towncrier._settings import load_config
+from towncrier._settings import load_config_from_options
 
 
 def _get_date():
     return date.today().isoformat()
 
 
-def generate_changelog_for_docs(directory, skip_if_empty=True):
+def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     """
-    The main entry point.
+    Generate a string which is the rendered changelog.
+
+    Parameters
+    ----------
+    skip_if_empty : `bool`
+        Return nothing if no entries are found.
+    underline : `int`
+        Controls the first underline to be used. The underline characters are
+        configurable in the towncrier settings they default to ``["=", "-", "~"]``.
+        This int sets the first number, so set to ``1`` to use ``-`` for the
+        title and subsequent characters for subsections.
     """
     directory = os.path.abspath(directory)
-    config = load_config(directory)
-
-    if config is None:
-        raise ValueError(f"No vaild towncrier configuration could be found in the directory {directory}")
+    base_directory, config = load_config_from_options(directory, None)
 
     curdir = os.getcwd()
-    os.chdir(directory)
+    os.chdir(base_directory)
 
     print("Loading template...")
     if config["template"] is None:
         template = pkg_resources.resource_string(
-            "towncrier", "templates/template.rst"
+            "towncrier", "templates/default.rst"
         ).decode("utf8")
     else:
         with open(config["template"], "rb") as tmpl:
@@ -81,24 +88,21 @@ def generate_changelog_for_docs(directory, skip_if_empty=True):
 
     project_date = _get_date().strip()
 
-    if config["title_format"]:
-        top_line = config["title_format"].format(
-            name=project_name, version=project_version, project_date=project_date
-        )
-    else:
-        top_line = ""
+    title_format = config["title_format"] or "{name} {version} ({project_date})"
+    top_line = title_format.format(
+        name=project_name, version=project_version, project_date=project_date
+    )
 
     rendered = render_fragments(
-        # The 0th underline is used for the top line
         template,
         config["issue_format"],
         top_line,
         fragments,
         definitions,
-        config["underlines"][1:],
+        config["underlines"][underline+1:],
         config["wrap"],
         {"name": project_name, "version": project_version, "date": project_date},
-        top_underline=config["underlines"][0],
+        top_underline=config["underlines"][underline],
         all_bullets=config["all_bullets"],
     )
 
