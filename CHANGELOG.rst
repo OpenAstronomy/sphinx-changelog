@@ -1,3 +1,12 @@
+Sphinx_Changelog v1.1.1 (2021-05-14)
+====================================
+
+Bug Fixes
+---------
+
+- Re-implement the ``:towncrier-skip-if-empty:`` flag as it was dropped in the upgrade to 21.3. (`#10 <https://github.com/OpenAstronomy/sphinx-changelog/pull/10>`__)
+
+
 Sphinx_Changelog v1.1.0 (2021-05-11)
 ====================================
 

@@ -1,1 +1,0 @@
-Re-implement the ``:towncrier-skip-if-empty:`` flag as it was dropped in the upgrade to 21.3.
