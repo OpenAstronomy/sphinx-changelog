@@ -64,6 +64,11 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     fragments, fragment_filenames = find_fragments(
         base_directory, config["sections"], fragment_directory, definitions
     )
+
+    # Empty fragments now are an OrderedDict([('', {})])
+    if skip_if_empty and not fragments.get('', True):
+        return ""
+
     fragments = split_fragments(
         fragments, definitions, all_bullets=config["all_bullets"]
     )
