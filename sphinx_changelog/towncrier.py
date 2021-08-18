@@ -112,4 +112,6 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     )
 
     os.chdir(curdir)
-    return rendered
+
+
+    return top_line + rendered
