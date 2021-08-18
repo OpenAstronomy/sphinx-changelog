@@ -1,0 +1,1 @@
+Fixed rendering to match towncrier, which means that top_line should not be included in the template.
