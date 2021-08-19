@@ -1,3 +1,13 @@
+Sphinx_Changelog v1.1.2 (2021-08-19)
+====================================
+
+Bug Fixes
+---------
+
+- Explicitly specify encoding when writing changelog. (`#11 <https://github.com/OpenAstronomy/sphinx-changelog/pull/11>`__)
+- Fixed rendering to match towncrier, which means that top_line should not be included in the template. (`#12 <https://github.com/OpenAstronomy/sphinx-changelog/pull/12>`__)
+
+
 Sphinx_Changelog v1.1.1 (2021-05-14)
 ====================================
 
