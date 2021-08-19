@@ -112,4 +112,11 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     )
 
     os.chdir(curdir)
+
+    # To work around https://github.com/twisted/towncrier/issues/346 we check
+    # to see if the template is going to write the top_line, and if it isn't
+    # then we write it.
+    if "{{ top_line }}" not in template:
+        rendered = top_line + rendered
+
     return rendered
