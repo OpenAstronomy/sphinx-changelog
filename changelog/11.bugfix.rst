@@ -1,0 +1,1 @@
+Explicitly specify encoding when writing changelog.
