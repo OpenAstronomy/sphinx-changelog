@@ -60,7 +60,7 @@ class ChangeLog(SphinxDirective):
         changelog_filename = self.get_absolute_path(self.options['changelog_file'])
         if not changelog_filename.exists():
             raise self.severe(f"Can not find changelog file at {changelog_filename}")
-        with open(changelog_filename) as fobj:
+        with open(changelog_filename, encoding='utf8') as fobj:
             return statemachine.string2lines(fobj.read(), convert_whitespace=True)
 
     def run(self):
