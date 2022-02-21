@@ -20,7 +20,7 @@ then put the following rst into your documentation:
     .. changelog::
        :towncrier:
 
-By default it will assume the root of the repository (location of the ``pyproject.toml`` file) is up one leve from the location of the rst file with the directive in it.
+By default it will assume the root of the repository (location of the ``pyproject.toml`` file) is up one level from the location of the rst file with the directive in it.
 This makes the default equivalent to:
 
 .. code-block:: rst
