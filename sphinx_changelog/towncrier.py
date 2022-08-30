@@ -93,15 +93,12 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
 
     project_date = _get_date().strip()
 
-    title_format = config["title_format"] or "{name} {version} ({project_date})"
-    top_line = title_format.format(
-        name=project_name, version=project_version, project_date=project_date
-    )
+    # Custom title formats can only be added after rendering
+    render_title = False if config["title_format"] else True
 
     rendered = render_fragments(
         template,
         config["issue_format"],
-        top_line,
         fragments,
         definitions,
         config["underlines"][underline+1:],
@@ -109,14 +106,19 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
         {"name": project_name, "version": project_version, "date": project_date},
         top_underline=config["underlines"][underline],
         all_bullets=config["all_bullets"],
+        render_title=render_title,
     )
 
     os.chdir(curdir)
 
-    # To work around https://github.com/twisted/towncrier/issues/346 we check
-    # to see if the template is going to write the top_line, and if it isn't
-    # then we write it.
-    if "{{ top_line }}" not in template:
-        rendered = top_line + rendered
+    if not render_title:  # Prepend the custom title format
+        top_line = config["title_format"].format(
+            name=project_name, version=project_version, project_date=project_date
+        )
+        rendered = "\n".join([
+            top_line,
+            config["underlines"][underline] * len(top_line),
+            rendered,
+        ])
 
     return rendered
