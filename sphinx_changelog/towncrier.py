@@ -34,7 +34,6 @@ class _Config:
             return getattr(self.config, val)
 
 
-
 def _get_date():
     return date.today().isoformat()
 
