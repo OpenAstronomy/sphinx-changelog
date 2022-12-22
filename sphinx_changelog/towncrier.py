@@ -15,6 +15,26 @@ from towncrier._project import get_project_name, get_version
 from towncrier._settings import load_config_from_options
 
 
+class _Config:
+    """
+    Wrapper class to make the (private) config object in towncrier
+    subscriptable.
+
+    In version 22.12.0 the config object was turned
+    from a dict to a dataclass, so this can be removed if/when
+    towncrier is pinned to >= 22.12.
+    """
+    def __init__(self, config):
+        self.config = config
+
+    def __getitem__(self, val):
+        try:
+            return self.config[val]
+        except Exception:
+            return getattr(self.config, val)
+
+
+
 def _get_date():
     return date.today().isoformat()
 
@@ -35,6 +55,7 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     """
     directory = os.path.abspath(directory)
     base_directory, config = load_config_from_options(directory, None)
+    config = _Config(config)
 
     curdir = os.getcwd()
     os.chdir(base_directory)
@@ -52,7 +73,7 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
 
     definitions = config["types"]
 
-    if config.get("directory"):
+    if config["directory"]:
         base_directory = os.path.abspath(config["directory"])
         fragment_directory = None
     else:
@@ -73,15 +94,15 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
         fragments, definitions, all_bullets=config["all_bullets"]
     )
 
-    project_version = config.get('version')
+    project_version = config['version']
     if project_version is None:
         project_version = get_version(
             os.path.join(base_directory, config["package_dir"]), config["package"]
         ).strip()
 
-    project_name = config.get('name')
+    project_name = config['name']
     if not project_name:
-        package = config.get("package")
+        package = config["package"]
         if package:
             project_name = get_project_name(
                 os.path.abspath(os.path.join(base_directory, config["package_dir"])),
