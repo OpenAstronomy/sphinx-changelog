@@ -50,6 +50,9 @@ stages:
           - linux: build_docs
             pytest: false
 
+          - linux: build_docs_latesttowncrier
+            pytest: false
+
   # Don't build dists on PRs
   - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
     - stage: Release
