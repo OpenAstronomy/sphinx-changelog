@@ -1,0 +1,1 @@
+The ``towncrier`` version is now pinned to a specific version in ``sphinx_changelog`` dependencies.
