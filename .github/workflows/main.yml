@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@v1
+    with:
+      envs: |
+        - linux: codestyle
+        - linux: build_docs
+        - linux: build_docs_latesttowncrier
+
+  publish:
+    needs: [tests]
+    if: github.event_name != 'pull_request'
+    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish_pure_python.yml@v1
+    with:
+      upload_to_pypi: ${{ startsWith(github.event.ref, 'refs/tags/v') && !endsWith(github.event.ref, '.dev') }}
+    secrets:
+      pypi_token: ${{ secrets.PYPI_API_TOKEN }}
