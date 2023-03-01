@@ -7,6 +7,15 @@ Currently this supports `towncrier <https://github.com/twisted/towncrier>`__ and
 
 For more details see the documentation: https://sphinx-changelog.readthedocs.io
 
+Doing a Release
+---------------
+
+For maintainers releasing this package, follow these steps:
+
+1. Update CHANGELOG.rst
+2. Push a tag
+3. Profit
+
 License
 -------
 
