@@ -1,3 +1,45 @@
+v1.3.0 (2023-03-01)
+===================
+
+Notes
+-----
+
+This release pins the version of towncrier to 22.12.0, this is because we rely on private API in towncrier, so changes are needed on every release.
+
+Changes
+-------
+
+- Update to towncrier 22.12.0, and other fixes by @dstansby in https://github.com/OpenAstronomy/sphinx-changelog/pull/17
+- Migrate to github actions by @Cadair in https://github.com/OpenAstronomy/sphinx-changelog/pull/18
+
+New Contributors
+----------------
+
+- @dstansby made their first contribution in https://github.com/OpenAstronomy/sphinx-changelog/pull/17
+
+
+v1.2.0 (2022-08-31)
+===================
+
+Notes
+-----
+
+This release requires towncrier 22.8.0
+
+Changes
+-------
+* docs: Fix typo in level by @jmartens in https://github.com/OpenAstronomy/sphinx-changelog/pull/13
+* Fix for removed `top_line` argument in towncrier renderer by @ConorMacBride in https://github.com/OpenAstronomy/sphinx-changelog/pull/14
+
+New Contributors
+----------------
+
+* @jmartens made their first contribution in https://github.com/OpenAstronomy/sphinx-changelog/pull/13
+* @ConorMacBride made their first contribution in https://github.com/OpenAstronomy/sphinx-changelog/pull/14
+
+**Full Changelog**: https://github.com/OpenAstronomy/sphinx-changelog/compare/v1.1.2...v1.2.0
+
+
 Sphinx_Changelog v1.1.2 (2021-08-19)
 ====================================
 
