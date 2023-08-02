@@ -6,9 +6,14 @@ This file is based heavily on towncrier, please see
 licenses/TOWNCRIER.rst
 """
 import os
+import sys
 from datetime import date
 
-import pkg_resources
+if sys.version_info < (3, 10):
+    import importlib_resources as resources
+else:
+    from importlib import resources
+
 from towncrier._builder import (find_fragments, render_fragments,
                                 split_fragments)
 from towncrier._project import get_project_name, get_version
@@ -40,10 +45,10 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     os.chdir(base_directory)
 
     print("Loading template...")
-    if config.template is None:
-        template = pkg_resources.resource_string(
-            "towncrier", "templates/default.rst"
-        ).decode("utf8")
+    if isinstance(config.template, tuple):
+        template = (
+            resources.files(config.template[0]).joinpath(config.template[1]).read_text()
+        )
     else:
         with open(config.template, "rb") as tmpl:
             template = tmpl.read().decode("utf8")
