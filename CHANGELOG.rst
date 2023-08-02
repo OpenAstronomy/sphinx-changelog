@@ -1,3 +1,12 @@
+Sphinx_Changelog 1.4.1 (2023-08-02)
+===================================
+
+Bug Fixes
+---------
+
+- Fix opening towncrier templates. (`#21 <https://github.com/OpenAstronomy/sphinx-changelog/pull/21>`__)
+
+
 Sphinx_Changelog 1.4.0 (2023-08-02)
 ===================================
 
