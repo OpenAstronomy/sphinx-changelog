@@ -11,6 +11,13 @@ on:
       - '!*post*'
   pull_request:
   workflow_dispatch:
+  schedule:
+    #        ┌───────── minute (0 - 59)
+    #        │ ┌───────── hour (0 - 23)
+    #        │ │ ┌───────── day of the month (1 - 31)
+    #        │ │ │ ┌───────── month (1 - 12 or JAN-DEC)
+    #        │ │ │ │ ┌───────── day of the week (0 - 6 or SUN-SAT)
+    - cron: '18 7 1 * *'  # Every 1st of the month at 07:00 UTC
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,7 +30,22 @@ jobs:
       envs: |
         - linux: codestyle
         - linux: build_docs
-        - linux: build_docs_latesttowncrier
+        - linux: build_docs_devtowncrier
+
+
+  notify:
+    if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+    needs: [tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Cadair/matrix-notify-action@main
+        with:
+          matrix_token: ${{ secrets.matrix_access_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          homeserver: ${{ secrets.matrix_homeserver }}
+          roomid: '!fZOLFXlQvSoKfLAVrd:openastronomy.org'
+          ignore_pattern: '.*Load.*'
+          summarise_success: false
 
   publish:
     needs: [tests]
