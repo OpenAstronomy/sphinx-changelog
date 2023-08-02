@@ -46,6 +46,7 @@ jobs:
           roomid: '!fZOLFXlQvSoKfLAVrd:openastronomy.org'
           ignore_pattern: '.*Load.*'
           summarise_success: false
+          workflow_description: "on sphinx-changelog"
 
   publish:
     needs: [tests]
