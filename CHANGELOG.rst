@@ -1,3 +1,13 @@
+Sphinx_Changelog 1.4.0 (2023-08-02)
+===================================
+
+Features
+--------
+
+- The ``towncrier`` version is now pinned to a specific version in ``sphinx_changelog`` dependencies. (`#17 <https://github.com/OpenAstronomy/sphinx-changelog/pull/17>`__)
+- Update supported version of towncrier to 23.6. (`#20 <https://github.com/OpenAstronomy/sphinx-changelog/pull/20>`__)
+
+
 v1.3.0 (2023-03-01)
 ===================
 

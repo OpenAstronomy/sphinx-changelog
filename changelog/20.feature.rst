@@ -1,1 +1,0 @@
-Update supported version of towncrier
