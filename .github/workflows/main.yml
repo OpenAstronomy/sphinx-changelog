@@ -32,7 +32,6 @@ jobs:
         - linux: build_docs
         - linux: build_docs_devtowncrier
 
-
   notify:
     if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     needs: [tests]
