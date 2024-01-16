@@ -1,1 +1,1 @@
-Increased minimum Python version to 3.9.
+Increased minimum Python version to 3.8
