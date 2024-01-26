@@ -1,3 +1,13 @@
+Sphinx_Changelog 1.5.1 (2024-01-26)
+===================================
+
+Backwards Incompatible Changes
+------------------------------
+
+- Increased minimum Python version to 3.8 to match towncrier. (`#23 <https://github.com/OpenAstronomy/sphinx-changelog/pull/23>`__)
+- Increased towncrier version to 23.11.0 (`#23 <https://github.com/OpenAstronomy/sphinx-changelog/pull/23>`__)
+
+
 Sphinx_Changelog 1.4.1 (2023-08-02)
 ===================================
 
