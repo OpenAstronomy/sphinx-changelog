@@ -1,11 +1,10 @@
-# Configure dependabot to automatically open PRs for bumping the hard pin of towncrier.
-
 version: 2
 updates:
-  - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "pip"
+    directory: "/"
     versioning-strategy: "increase"
     schedule:
       interval: "weekly"
     allow:
-      - package-name: "towncrier"
+      - dependency-name: "towncrier"
+        dependency-type: "direct"
