@@ -41,9 +41,6 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     directory = os.path.abspath(directory)
     base_directory, config = load_config_from_options(directory, None)
 
-    curdir = os.getcwd()
-    os.chdir(base_directory)
-
     print("Loading template...")
     if isinstance(config.template, tuple):
         template = (
@@ -57,17 +54,8 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
 
     definitions = config.types
 
-    if config.directory:
-        base_directory = os.path.abspath(config.directory)
-        fragment_directory = None
-    else:
-        base_directory = os.path.abspath(
-            os.path.join(directory, config.package_dir, config.package)
-        )
-        fragment_directory = "newsfragments"
-
     fragments, fragment_filenames = find_fragments(
-        base_directory, config.sections, fragment_directory, definitions
+        base_directory, config, strict=False
     )
 
     # Empty fragments now are an OrderedDict([('', {})])
@@ -113,8 +101,6 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
         all_bullets=config.all_bullets,
         render_title=render_title,
     )
-
-    os.chdir(curdir)
 
     if not render_title:  # Prepend the custom title format
         top_line = config.title_format.format(
