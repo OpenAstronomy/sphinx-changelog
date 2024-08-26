@@ -1,3 +1,11 @@
+Sphinx_Changelog 1.6.0 (2024-08-26)
+===================================
+
+Backwards Incompatible Changes
+------------------------------
+
+- Increased towncrier version to 24.8.0 (`#23 <https://github.com/OpenAstronomy/sphinx-changelog/pull/27>`__)
+
 Sphinx_Changelog 1.5.1 (2024-01-26)
 ===================================
 
