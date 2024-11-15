@@ -5,6 +5,7 @@ changelog.
 This file is based heavily on towncrier, please see
 licenses/TOWNCRIER.rst
 """
+from pathlib import Path
 import os
 import sys
 from datetime import date
@@ -24,7 +25,7 @@ def _get_date():
     return date.today().isoformat()
 
 
-def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
+def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1, build_env=None):
     """
     Generate a string which is the rendered changelog.
 
@@ -43,12 +44,12 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
 
     print("Loading template...")
     if isinstance(config.template, tuple):
-        template = (
-            resources.files(config.template[0]).joinpath(config.template[1]).read_text()
-        )
+        template_path = resources.files(config.template[0]).joinpath(config.template[1])
     else:
-        with open(config.template, "rb") as tmpl:
-            template = tmpl.read().decode("utf8")
+        template_path = Path(config.template)
+
+    template = template_path.read_text()
+
 
     print("Finding news fragments...")
 
@@ -57,6 +58,12 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1):
     fragments, fragment_filenames = find_fragments(
         base_directory, config, strict=False
     )
+
+    # register files as dependencies, so e.g. sphinx-autobuild works
+    if build_env is not None:
+        build_env.note_dependency(template_path)
+        for path, _ in fragment_filenames:
+            build_env.note_dependency(path)
 
     # Empty fragments now are an OrderedDict([('', {})])
     if skip_if_empty and not fragments.get('', True):

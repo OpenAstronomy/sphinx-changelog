@@ -50,8 +50,12 @@ class ChangeLog(SphinxDirective):
         config_path = self.get_absolute_path(config_path)
         skip_if_empty = "towncrier-skip-if-empty" in self.options
         try:
-            changelog = generate_changelog_for_docs(config_path, skip_if_empty=skip_if_empty,
-                                                    underline=self.options.get('towncrier-title-underline-index', 0))
+            changelog = generate_changelog_for_docs(
+                config_path,
+                skip_if_empty=skip_if_empty,
+                underline=self.options.get('towncrier-title-underline-index', 0),
+                build_env=self.env,
+            )
         except Exception as exc:
             raise self.severe(str(exc))
         return statemachine.string2lines(changelog, convert_whitespace=True)
