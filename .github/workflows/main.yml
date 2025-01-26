@@ -31,6 +31,7 @@ jobs:
         - linux: codestyle
         - linux: build_docs
         - linux: build_docs_devtowncrier
+        - linux: build_docs_incremental
 
   notify:
     if: always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
