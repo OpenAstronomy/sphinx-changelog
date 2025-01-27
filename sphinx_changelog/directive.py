@@ -4,7 +4,6 @@ from pathlib import Path
 from docutils import statemachine
 from docutils.parsers.rst.directives import flag, path, unchanged
 from sphinx.util.docutils import SphinxDirective
-
 from towncrier._builder import find_fragments
 from towncrier._settings import load_config_from_options
 

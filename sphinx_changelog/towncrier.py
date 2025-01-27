@@ -5,10 +5,10 @@ changelog.
 This file is based heavily on towncrier, please see
 licenses/TOWNCRIER.rst
 """
-from pathlib import Path
 import os
 import sys
 from datetime import date
+from pathlib import Path
 
 if sys.version_info < (3, 10):
     import importlib_resources as resources
@@ -49,7 +49,6 @@ def generate_changelog_for_docs(directory, skip_if_empty=True, underline=1, buil
         template_path = Path(config.template)
 
     template = template_path.read_text()
-
 
     print("Finding news fragments...")
 
